@@ -1,0 +1,11 @@
+\babel@toc {russian}{}\relax 
+\beamer@sectionintoc {2}{Динамика шаровых скоплений}{3}{0}{1}
+\beamer@subsectionintoc {2}{1}{Задача N тел}{3}{0}{1}
+\beamer@subsectionintoc {2}{2}{Приближение свободного поля}{4}{0}{1}
+\beamer@subsectionintoc {2}{3}{Бесстолкновительное уравнение Больцмана}{6}{0}{1}
+\beamer@subsectionintoc {2}{4}{Общий случай}{8}{0}{1}
+\beamer@subsectionintoc {2}{5}{Характерные времена}{9}{0}{1}
+\beamer@subsectionintoc {2}{6}{Модели квазистационарного равновесия. Теорема Джинса}{11}{0}{1}
+\beamer@subsectionintoc {2}{7}{Модели квазистационарного равновесия. Классификация}{12}{0}{1}
+\beamer@subsectionintoc {2}{8}{Модели квазистационарного равновесия. Модель Кинга}{13}{0}{1}
+\beamer@sectionintoc {3}{Список литературы}{17}{0}{2}

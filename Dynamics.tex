@@ -1,0 +1,197 @@
+\documentclass{beamer}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage[russian]{babel}
+\usepackage{hyperref}
+\usepackage{enumerate}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{wrapfig}
+\usepackage{natbib}
+\usepackage{bibentry}
+\usepackage{url}
+\usetheme{Madrid}
+\usecolortheme{crane}
+\useinnertheme{rounded}
+\usefonttheme{serif}
+\setbeamertemplate{enumerate items}[default]
+\addtobeamertemplate{frametitle}{
+   \let\insertframetitle\insertsectionhead}{}
+\addtobeamertemplate{frametitle}{
+    \let\insertframesubtitle\insertsubsectionhead}{}
+
+\makeatletter
+  \CheckCommand*\beamer@checkframetitle{\@ifnextchar\bgroup\beamer@inlineframetitle{}}
+  \renewcommand*\beamer@checkframetitle{\global\let\beamer@frametitle\relax\@ifnextchar\bgroup\beamer@inlineframetitle{}}
+\makeatother
+
+\begin{document}
+\title{Динамика и эволюция шаровых скоплений}
+\author{Фархутдинова~А.~М. \and Кочергина~П.~B. \and Дромашко~M.~C.}
+\institute{Санкт-Петербургский государственный университет}
+\date{14 марта 2024}
+\maketitle
+\section*{Содержание}
+\begin{frame}
+    \tableofcontents
+\end{frame}
+\section{Динамика шаровых скоплений}
+\subsection{Задача N тел}
+\begin{frame}
+    Уравнения задачи N тел в канонической форме:
+    \begin{equation*}
+        \begin{cases}
+            \dot{p_i} = -\cfrac{\partial \mathcal{H}}{\partial r_i}\\
+            \dot{r_i} = \cfrac{\partial \mathcal{H} }{\partial p_i}
+        \end{cases},
+    \end{equation*}
+    где 
+    \begin{equation*}
+        \mathcal{H} = \sum_{i=0}^{N} \cfrac{p_i^2}{2m_i} - \cfrac{1}{2}\sum_{i \neq j} \cfrac{Gm_im_j}{\Vert r_i - r_j \Vert}.
+    \end{equation*}
+    Характерное число звезд в шаровых скоплениях $N \sim 10^5 \div 10^6$, поэтому на практике численное решение такой системы уравнений не представляется
+    возможным. 
+\end{frame}
+\subsection{Приближение свободного поля}
+\begin{frame}
+    Если пренебречь сильными взаимодействиями между звездами (столкновения~и тесные сближения звезд), то можно ввести усредненный (или <<сглаженнный>>) потенциал $\psi$ (свободное поле), 
+    действующий на~пробную массу, не~оказывающую влияния на~поле скопления. Поскольку гравитационное ускорение, вообще говоря, не зависит от массы частицы, можно в качестве канонических переменных взять скорость $v$ и положение $r$.
+\end{frame}
+\begin{frame}
+    Тогда уравнения задачи $N$ тел для пробной частицы:
+    \begin{equation*}
+        \begin{cases}
+            \dot{v} = -\cfrac{\partial \mathcal{H}}{\partial r}\\
+            \dot{r} = \cfrac{\partial \mathcal{H} }{\partial v}
+        \end{cases}, 
+    \end{equation*}
+    где
+\begin{equation*}
+    \mathcal{H} = \cfrac{v^2}{2} + \psi.
+\end{equation*}
+\end{frame}
+\subsection{Бесстолкновительное уравнение Больцмана}
+\begin{frame}
+    Для того, чтобы отождествить звезды с пробными частицами можно ввести функцию распределения в фазовом пространстве $f(t, r, v)$, 
+    тогда плотность звезд запишется как 
+    \begin{equation*}
+        \rho(t,r) = \int_{\mathbb{R} ^3} f(t,r,v) dv^3.
+    \end{equation*}
+    И можно записать уравнение Пуассона:
+    \begin{equation*}
+        \Delta \psi = 4\pi \rho
+    \end{equation*}
+\end{frame}
+\begin{frame}
+    Применив теорему Лиувилля для гамильтоновых систем можно получить уравнение на $f$:
+    \begin{equation*}
+        \cfrac{\partial f}{\partial t} + \left\{ f, \mathcal{H} \right\} = 0
+    \end{equation*}
+    или
+    \begin{equation*}
+        \cfrac{\partial f}{\partial t} + \left(v,\cfrac{\partial f}{\partial r}\right) - \left( \nabla \psi,\cfrac{\partial f}{\partial v}\right)  = 0.
+    \end{equation*}
+    Это бесстолкновительное уравнение Больцмана.
+\end{frame}
+\subsection{Общий случай}
+\begin{frame}
+    Для звездных скоплений можно отказаться от предположения отсутствия столкновений, добавив неоднородность:
+    \begin{equation*}
+        \cfrac{\partial f}{\partial t} + \left(v,\cfrac{\partial f}{\partial r}\right) - \left( \nabla \psi,\cfrac{\partial f}{\partial v}\right)  = \left(\cfrac{\partial f}{\partial t}\right)_{enc}
+    \end{equation*}
+    Это уравнение Больцмана.
+\end{frame}
+\subsection{Характерные времена}
+\begin{frame}
+Уравнение Больцмана является интегро-дифференциальным уравнением, поэтому решать его численно сложно. 
+Но можно выделить набор характерных времен, на которых уравнение существенно упрощается.
+\begin{itemize}
+    \item Время пересечения $t_{cr} = \cfrac{2R}{v}$, где $R$ --- характерный размер скопления, а $v$ --- характерная скорость звезд. $t_{cr} \sim 10^6$ лет.
+    \item Время релаксации $t_r \sim \cfrac{N}{\ln(\varkappa N)} t_{cr}$. $t_r \sim 10^8$ лет. Релаксация практически полностью обусловленна сближениями звезд.
+    Во~время оценки времени релаксации можно учитывать разные по~составу сближения, поэтому в~разных работах $\varkappa$ оказывается разным, но~всегда $\varkappa \sim 1$.
+    \par
+    Для шаровых скоплений $t_r \gg  t_{cr}$. 
+\end{itemize}
+\end{frame}
+\begin{frame}
+    \begin{itemize}
+        \item Время эволюции $t_{evol} \sim 10^{10}$ лет. Обусловленно процессами изменения формы скопления и обмена энергией, 
+        например, диссипацией звезд или динамическим трением. 
+    \end{itemize}
+    Поскольку $t_{cr}$ мало для шаровых скоплений, а $t_{r}$ велико, имеет смысл рассматривать динамику скоплений на временах $t$ таких, что
+    $t_{cr} \ll t \ll t_{r}$. В таком случае уравнение Больцмана можно записать в виде:
+    \begin{equation*}
+        \left(v,\cfrac{\partial f}{\partial r}\right) - \left( \nabla \psi,\cfrac{\partial f}{\partial v}\right) = 0
+    \end{equation*}
+    Это уравнение напоминает уравнение для квазистационарного распределения из статистической физики, поэтому решения этого уравнения называют <<квазистационарными>>.
+\end{frame}
+\subsection{Модели квазистационарного равновесия. Теорема Джинса}
+\begin{frame}
+    Справедлива теорема Джинса: любое стационарное решение бесстолкновительного уравнения Больцмана является функцией интегралов движения.
+    \begin{equation*}
+        f(r, v) = f(I_1, I_2, \dots)
+    \end{equation*}
+    Для задачи $N$ тел нетривиальных изолирующих интегралов, которые можно выразить алгебраически, всего два:
+    \begin{itemize}
+        \item Механическая энергия $E = \cfrac{v^2}{2} + \psi$
+        \item Момент импульса $L = r \times  v$
+    \end{itemize}
+\end{frame}
+\subsection{Модели квазистационарного равновесия. Классификация}
+\begin{frame}
+Отсюда, следуя работе \cite{BOOK}, можно составить классификацию моделей.
+\begin{itemize}
+    \item $f = f(E)$. Такие распределения изотропны в пространстве скоростей. Поэтому дисперсии разных компонент $v$ равны между собой.
+    \item $f = f(E, L)$. В таких моделях скопления имеют выделенную ось вращения, при этом $\sigma_{v_\varphi} = \sigma_{v_\theta} \neq \sigma_{v_r}$.
+    \item $f = f(E, L, I_3)$. Только такие модели допускают полную анизотропию скоростей при стационарном распределении. При этом неизвестно, существует ли $I_3$.
+\end{itemize}
+\end{frame}
+\subsection{Модели квазистационарного равновесия. Модель Кинга}
+\begin{frame}
+Одной из самых успешных и при этом простых моделей является модель Кинга\cite{king}.
+\begin{itemize}
+    \item Предположим, что распределение скоростей в шаровом скоплении изотропно.
+    \item Поскольку $t_{cr}$ мало, естественно предположить, что распределение звезд в таком случае должно давать распределение, напоминающее распределение Максвелла по скоростям.
+    \item Если предположить чисто Максвелловское распределение, то неминуемо придем к выводу о бесконечной массе шарового скопления (Чандрасекар, 1960). 
+\end{itemize}
+\end{frame}
+\begin{frame}
+Кинг предложил выход:
+\begin{equation*}
+    f(E) \propto  \begin{cases}
+        e^{-2j^2E} - e^{-2j^2E_t}, E < E_t \\
+        0, E \geq E_t
+    \end{cases},
+\end{equation*}
+где $j$ и $E_t$ --- параметры.
+\par Физически эта модель говорит, о наличии диссипации звезд в шаровых скоплениях.
+\end{frame}
+\begin{frame}
+    На практике вместо подбора $j$ и $E_t$ вводят:
+    \begin{itemize}
+        \item $r_t$ --- приливной радиус. Для $r \geq r_t$, $\rho(r) = 0$.
+        \item $r_c = \sqrt{\cfrac{9}{8\pi G j^2 \rho_c}}$ --- радиус ядра.
+        \item $c = lg \cfrac{r_t}{r_c}$ --- степень концентрации к центру.
+    \end{itemize}
+    и подбирают $r_t$ и $c$ по наблюдениям.
+\end{frame}
+\begin{frame}
+В модель Кинга можно легко включить вращение скопления:
+\begin{equation*}
+    f(E, L) \propto  \begin{cases}
+        e^{-L^2j^2/r_a}\left(e^{-2j^2E} - e^{-2j^2E_t}\right), E < E_t \\
+        0, E \geq E_t
+    \end{cases},
+\end{equation*}
+где $j$, $E_t$ и $r_a$ --- параметры.
+\end{frame}
+%-------------------------------------------------------------------------------------
+\section{Список литературы}
+\begin{frame}[t, allowframebreaks]{Список литературы}
+    \bibliographystyle{plain}
+    \bibliography{bibliography}
+\end{frame}
+\end{document}
